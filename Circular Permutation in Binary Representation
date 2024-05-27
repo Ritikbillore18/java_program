@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> circularPermutation(int n, int start) {
+        List<Integer> temp = new ArrayList<>();
+        temp.add(0);
+        for(int i = 0; i < n; i++){
+            int size = temp.size();
+            for(int j = size - 1; j >= 0; j--){
+                temp.add(temp.get(j) | (1 << i));
+            }
+        }
+        int index = 0;
+        while(temp.get(index) != start){
+            index++;
+        }
+        List<Integer> result = new ArrayList<>();
+        for(int i = index; i < temp.size(); i++){
+            result.add(temp.get(i));
+        }
+        for(int i = 0; i < index; i++){
+            result.add(temp.get(i));
+        }
+        return result;
+    }
+}
